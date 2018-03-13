@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.easyproject.easyee.sm.buyorder.dao.BuyOrderDao">
+      <resultMap type="BuyOrder" id="BuyOrderMap">
+		<result column="order_id" property="orderId"/>
+		<result column="user_id" property="userId"/>
+		<result column="card_name" property="cardName"/>
+		<result column="card_type" property="cardType"/>
+		<result column="card_price" property="cardPrice"/>
+		<result column="card_course" property="cardCourse"/>
+		<result column="card_date" property="cardDate"/>
+		<result column="card_site" property="cardSite"/>
+		<result column="card_salesman" property="cardSalesMan"/>
+		<result column="card_face_amount" property="cardFaceAmount"/>
+		<result column="use_number" property="useNumber"/>
+		<result column="card_state" property="cardState"/>
+	  </resultMap>
+	  
+	  <select id="select" resultMap="BuyOrderMap">
+	     select * from buy_order
+	  </select>
+	  <select id="findMaxRow" resultType="int">
+		select count(*) from buy_order
+	</select>
+	<select id="pagination" resultMap="BuyOrderMap">
+		${autoSQL}
+	</select>
+  </mapper>

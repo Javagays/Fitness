@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.easyproject.easyee.sm.user.dao.UserDAO">
+
+<resultMap type="User" id="UserMap">
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_phone" property="userPhone"/>
+		<result column="user_integral" property="userIntegral"/>
+		<result column="home_location" property="homeLocation"/>
+		<result column="work_location" property="workLocation"/>
+		<result column="site" property="site"/>
+		<result column="birthday" property="birthday"/>
+		<result column="user_IDcard" property="userIDcard"/>
+		<result column="login_time" property="registerTime"/>
+		<result column="height" property="height"/>
+		<result column="weight" property="weight"/>
+		<result column="sex" property="sex"/>
+	</resultMap>
+
+	<insert id="save" useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
+		insert into user
+		 (user_name,user_phone,user_integral,home_location,work_location,site,birthday,user_IDcard,login_time,height,weight,sex) 
+		values
+		 (#{userName},#{userPhone},0,#{homeLocation},#{workLocation},#{site},#{birthday},#{userIDcard},#{registerTime},#{height},#{weight},#{sex})
+	</insert>
+	<delete id="delete">
+		delete from user where user_id=#{userId}
+	</delete>
+	<update id="update">
+		update user set user_name=#{userName},user_phone=#{userPhone},user_integral=#{userIntegral},home_location=#{homeLocation},work_location=#{workLocation},
+		site=#{site},birthday=#{birthday},user_IDcard=#{userIDcard},login_time=#{registerTime},height=#{height},weight=#{weight},sex=#{sex}
+		where user_id=#{userId}
+	</update>
+	<select id="get" resultType="User">
+		select * from user where user_phone=#{userPhone}
+	</select>
+
+	<select id="findAll" resultMap="UserMap">
+		select * from user
+	</select>
+	<select id="findMaxRow" resultType="int">
+		select count(*) from user
+	</select>
+	
+	<!-- EasyMyBatis-Pagination -->
+	<select id="pagination" resultMap="UserMap">
+		${autoSQL}
+	</select>
+</mapper>

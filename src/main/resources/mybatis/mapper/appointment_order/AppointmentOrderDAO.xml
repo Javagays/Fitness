@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.easyproject.easyee.sm.appointment_order.dao.AppointmentOrderDAO">
+
+	<insert id="save" useGeneratedKeys="true" keyColumn="order_id" keyProperty="order_id">
+		insert into appointment_order(user_id,Coach_Id,site,appointment_time) values(#{user_id},#{Coach_Id},#{site},appointment_time=#{appointment_time})
+	</insert>
+	<delete id="delete">
+		delete from appointment_order where order_id=#{order_id}
+	</delete>
+	<update id="update">
+		update appointment_order set user_id=#{user_id},Coach_Id=#{Coach_Id},site=#{site},appointment_time=#{appointment_time} where order_id=#{order_id}
+	</update>
+	
+	<select id="get" resultType="AppointmentOrder">
+		select * from appointment_order where order_id=#{order_id}
+	</select>
+
+	<select id="findAll" resultType="AppointmentOrder">
+		select * from appointment_order
+	</select>
+	<select id="findMaxRow" resultType="int">
+		select count(*) from appointment_order
+	</select>
+	
+	<!-- EasyMyBatis-Pagination -->
+	<select id="pagination" resultType="AppointmentOrder">
+		${autoSQL}
+	</select>
+</mapper>

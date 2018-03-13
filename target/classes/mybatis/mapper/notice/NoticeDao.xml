@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.easyproject.easyee.sm.notice.dao.NoticeDao">
+  		<resultMap type="Notice" id="noticeMap">
+  			<result column="notice_id" property="noticeId"/>
+  			<result column="no_content" property="noContent"/>
+  		</resultMap>
+  		
+  		<insert id="add" useGeneratedKeys="true" keyColumn="notice_id" keyProperty="noticeId">
+  			insert into notice(no_content) values(#{noContent})
+  		</insert>
+  		<delete id="deleteById">
+  			delete from notice where notice_id=#{noticeId}
+  		</delete>
+  		<select id="get" resultMap="noticeMap">
+  			select * from notice where notice_id =#{noticeId}
+  		</select>
+  		<update id="update">
+  			update notice set no_content =#{noContent} where notice_id =#{noticeId}
+  		</update>
+  		
+  		<select id="pagination" resultMap="noticeMap">
+		${autoSQL}
+	    </select>
+	    
+	    <select id="findMaxRow" resultType="int">
+		select count(*) from notice
+	</select>
+  </mapper>

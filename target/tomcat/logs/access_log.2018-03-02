@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [02/Mar/2018:10:30:51 +0800] "GET /logout HTTP/1.1" 302 - http-bio-8080-exec-1 55
+0:0:0:0:0:0:0:1 - - [02/Mar/2018:10:30:52 +0800] "POST /staticresources/easyee/json/easyui.theme.combobox.json HTTP/1.1" 200 1061 http-bio-8080-exec-3 45
+0:0:0:0:0:0:0:1 - - [02/Mar/2018:10:30:52 +0800] "GET /toLogin HTTP/1.1" 200 6177 http-bio-8080-exec-2 785
+0:0:0:0:0:0:0:1 - - [02/Mar/2018:10:30:53 +0800] "GET /jsp/VerifyCode.jsp HTTP/1.1" 200 528 http-bio-8080-exec-5 1022
+0:0:0:0:0:0:0:1 - - [02/Mar/2018:10:31:12 +0800] "POST /checkCaptcha HTTP/1.1" 200 69 http-bio-8080-exec-7 128
+0:0:0:0:0:0:0:1 - - [02/Mar/2018:10:31:12 +0800] "POST /toLogin HTTP/1.1" 302 - http-bio-8080-exec-8 362
+0:0:0:0:0:0:0:1 - - [02/Mar/2018:10:31:12 +0800] "GET /toMain HTTP/1.1" 200 10405 http-bio-8080-exec-9 359
+0:0:0:0:0:0:0:1 - - [02/Mar/2018:10:31:13 +0800] "POST /staticresources/easyee/json/easyui.theme.combobox.json HTTP/1.1" 200 1061 http-bio-8080-exec-10 9

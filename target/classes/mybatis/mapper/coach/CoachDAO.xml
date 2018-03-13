@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.easyproject.easyee.sm.coach.dao.CoachDao">
+
+	<insert id="add" useGeneratedKeys="true" keyColumn="Coach_Id" keyProperty="coachId">
+		insert into Coach( 
+		   Coach_name,           
+		   Coach_Content,        
+		   Coach_Phoneno,       
+		   Coach_motto,       
+		   Coach_type,         
+		   Coach_experience,    
+		   Coach_imageURL,    
+		   Coach_status,      
+		   Coach_starttime,
+		   Coach_endtime 
+)		
+		values(#{coachName},#{coachContent},#{coachPhoneno},#{coachMotto},#{coachType},
+		#{coachExperience},#{coachImageUrl},#{coachStatus},#{coachStarttime},#{coachEndtime})
+	</insert>
+	<delete id="delete">
+		delete from Coach where Coach_Id=#{coachId}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from Coach 
+		 WHERE Coach_Id in
+		  <foreach item="item" index="index" collection="array"
+		      open="(" separator="," close=")">
+		        #{item}
+		  </foreach>
+	</delete>
+	
+	<update id="update">
+		update Coach 
+		<set>
+			<if test="coachName != null">
+				Coach_name = #{coachName},
+			</if>
+			<if test="coachContent != null">
+				Coach_Content = #{coachContent},
+			</if>
+			<if test="coachPhoneno != null">
+				Coach_Phoneno = #{coachPhoneno},
+			</if>
+			<if test="coachMotto != null">
+				Coach_motto= #{coachMotto},
+			</if>
+			<if test=" coachType != null">
+				 Coach_type= #{coachType},
+			</if>
+			<if test="coachExperience != null">
+				  Coach_experience= #{coachExperience},
+			</if>
+			<if test="coachImageUrl != null">
+				  Coach_imageURL= #{coachImageUrl},
+			</if>
+			<if test=" coachStatus != null">
+				   Coach_status= #{coachStatus},
+			</if>
+			<if test=" coachStarttime != null">
+				   Coach_starttime= #{coachStarttime},
+			</if>
+			<if test=" coachEndtime != null">
+				   Coach_endtime= #{coachEndtime},
+			</if>
+		</set>
+ 		where Coach_Id=#{coachId}
+	</update>
+	
+	<resultMap type="Coach" id="CoachMap">
+		<result column="Coach_name" property="coachName"/>
+		<result column="Coach_Id" property="coachId"/>
+		<result column="Coach_Content" property="coachContent"/>
+		<result column="Coach_Phoneno" property="coachPhoneno"/>
+		<result column="Coach_motto" property="coachMotto"/>
+		<result column="Coach_type" property="coachType"/>
+		<result column="Coach_experience" property="coachExperience"/>
+		<result column="Coach_imageURL" property="coachImageUrl"/>
+		<result column="Coach_status" property="coachStatus"/>
+		<result column="Coach_starttime" property="coachStarttime"/>
+		<result column="Coach_endtime" property="coachEndtime"/>
+	</resultMap>
+	
+	<select id="get"  resultMap="CoachMap">
+		select Coach_Id,Coach_name,Coach_imageURL from Coach where Coach_Id = #{coachId}
+	</select>
+	
+	<select id="selectAll" resultMap="CoachMap">
+		select * from Coach
+	</select>
+	
+	<select id="findMaxRow" resultType="int">
+		select count(*) from Coach
+	</select>
+	
+	<select id="pagination" resultMap="CoachMap">
+		${autoSQL}
+	</select>
+	
+</mapper>

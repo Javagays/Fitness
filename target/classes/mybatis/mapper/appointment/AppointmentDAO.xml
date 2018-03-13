@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.easyproject.easyee.sm.appointment.dao.AppointmentDAO">
+
+
+	<resultMap type="Appointment" id="AppointmentMap">
+		<result column="order_id" property="appointmentId"/>
+		<result column="appointment_time" property="appointmentTime"/>
+		<result column="Coach_Id" property="coachId"/>
+		<result column="Coach_name" property="coachName"/>
+		<result column="Coach_Content" property="coachContent"/>
+		<result column="Coach_Phoneno" property="coachPhoneno"/>
+		<result column="Coach_motto" property="coachMotto"/>
+		<result column="Coach_type" property="coachType"/>
+		<result column="Coach_experience" property="coachExperience"/>
+		<result column="Coach_imageURL" property="coachImageUrl"/>
+		<result column="Coach_status" property="coachStatus"/>
+		<result column="Coach_starttime" property="coachStarttime"/>
+		<result column="Coach_endtime" property="coachEndtime"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+	</resultMap>
+	
+	<select id="get" resultMap="AppointmentMap">
+		select a.order_id, u.user_id, u.user_name, a.site, a.appointment_time, c.Coach_Id, c.Coach_name from appointment_order a, coach c, user u where a.Coach_Id=c.Coach_Id and a.user_id=u.user_id and order_id=#{appointmentId}
+	</select>
+
+	<insert id="save" useGeneratedKeys="true" keyColumn="order_id" keyProperty="appointmentId">
+		insert into appointment_order(a.user_id,Coach_Id,site,appointment_time) values(#{userId},#{coachId},#{site},#{appointmentTime})
+	</insert>
+	<delete id="delete">
+		delete from appointment_order where order_id=#{appointmentId}
+	</delete>
+	
+	<update id="update">
+		update appointment_order 
+		<set>
+			<if test="userId != null">
+				user_id = #{userId},
+			</if>
+			<if test="coachContent != null">
+				Coach_Id = #{coachId},
+			</if>
+			<if test="site != null">
+				site = #{site},
+			</if>
+			<if test="appointmentTime != null">
+				appointmentT_time= #{appointmentTime},
+			</if>
+		</set>
+ 		where order_id=#{appointmentId}
+	</update>
+	
+
+	<select id="findAll" resultType="Appointment">
+		select * from appointment_order 
+	</select>
+	<select id="findMaxRow" resultType="int">
+		select count(*) from appointment_order
+	</select>
+	
+	<!-- EasyMyBatis-Pagination -->
+	<select id="pagination" resultMap="AppointmentMap">
+		${autoSQL}
+	</select>
+</mapper>
